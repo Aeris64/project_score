@@ -1,0 +1,9 @@
+{
+    "mode": "local",
+    "port": 6442,
+    "user": "root",
+    "pass": "root",
+    "host": "localhost",
+    "name": "project_jv",
+    "type": "mysql"
+}
