@@ -73,7 +73,7 @@ router.post('/', (req, res, next) => {
     const body = req.body;
     console.log(body)
 
-    if(!isSet(body) || !isSet(body.name)) return res.status(400).send('Bad body request');
+    if(!(body && body.name)) return res.status(400).send('Bad body request');
     console.log(body)
 
     Function.createOne(body.name)
