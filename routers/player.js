@@ -71,12 +71,14 @@ router.get('/name/:name', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     const body = req.body;
-    console.log(body)
 
     if(!(body && body.name)) return res.status(400).send('Bad body request');
-    console.log(body)
 
-    Function.createOne(body.name)
+    const player = {
+        name: body.name
+    }
+
+    Function.createOne(player)
         .then((result) => {
             console.log('res', result)
             return res.status(200).send(result);
