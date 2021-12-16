@@ -26,7 +26,7 @@ exports.getAll = async function getAll(rqQuery){
 exports.upsert = async function upsert(query, values){
     return new Promise((resolve, reject) => {
         Model.findOne(query)
-        .then(result => {
+        .then(async result => {
             if(result) {
                 console.log('here', result)
                 return resolve(result);
