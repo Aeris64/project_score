@@ -29,7 +29,9 @@ router.get('/:id', (req, res, next) => {
     const id = (isNaN(req.params.id) ? 0 : parseInt(req.params.id));
 
     const query = {
-        id: id
+        where: {
+            id: id
+        }
     };
 
     Function.getAll(query)
@@ -49,7 +51,10 @@ router.get('/name/:name', (req, res, next) => {
     const name = req.params.name;
 
     const query = {
-        name: name
+        attributes: ['id'],
+        where: {
+            name: name
+        }
     };
 
     Function.getAll(query)

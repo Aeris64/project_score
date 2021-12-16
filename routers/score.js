@@ -40,7 +40,7 @@ router.get('/player/:id', (req, res, next) => {
 
     Function.getAll(query)
         .then(async (result) => {
-            let playerName = await FunctionPlayer.getAll({id: id});
+            let playerName = await FunctionPlayer.getAll({where: {id: id}});
             playerName = (playerName[0] ? playerName[0].name : '');
 
             for(const row of result) {
@@ -84,7 +84,7 @@ router.get('/level/:id', (req, res, next) => {
             levelName = (levelName[0] ? levelName[0].name : '');
 
             for(const row of result) {
-                let playerName = await FunctionPlayer.getAll({id: row.idPlayer});
+                let playerName = await FunctionPlayer.getAll({where: {id: row.idPlayer}});
                 playerName = (playerName[0] ? playerName[0].name : '');
 
                 row.levelName = levelName;

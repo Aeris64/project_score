@@ -12,7 +12,7 @@ exports.getAll = async function getAll(rqQuery){
 
         if(rqQuery) query.where = rqQuery;
 
-        Model.findAll(query)
+        Model.findAll(rqQuery)
         .then(allResult => {
             const finalRes = [];
             for(const res of allResult){
