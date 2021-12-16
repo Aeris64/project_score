@@ -29,10 +29,9 @@ exports.upsert = async function upsert(query, values){
         .then(async result => {
             if(result) {
                 if(result.dataValues.time > values.time) return resolve(await result.update(values).then(finalRes => {return finalRes}));
-                
+
                 return resolve(result);
             }
-            //  return resolve(await result.update(values).then(finalRes => {return finalRes}));
 
             return resolve(await Model.create(values).then(finalRes => {return finalRes}));
         }).catch(err => {

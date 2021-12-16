@@ -80,7 +80,6 @@ router.post('/', (req, res, next) => {
 
     Function.createOne(player)
         .then((result) => {
-            console.log('res', result)
             return res.status(200).send(result);
         })
         .catch((err) => {

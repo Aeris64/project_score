@@ -89,6 +89,13 @@ router.get('/level/:id', (req, res, next) => {
 
                 row.levelName = levelName;
                 row.playerName = playerName;
+                
+                const minutes = Math.trunc(row.time / 6000);
+                const secondes = Math.trunc((row.time - (minutes * 6000)) / 100);
+                const centi = Math.trunc(row.time - (minutes * 6000) - (secondes * 100));
+                const finalTime = (minutes < 10 ? '0' : '') + minutes + ':' + (secondes < 10 ? '0' : '') + secondes + ':' + (centi < 10 ? '0' : '') + centi;
+
+                row.digitTime = finalTime;
             }
 
             return res.status(200).send(result);
