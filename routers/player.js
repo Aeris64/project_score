@@ -45,6 +45,26 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
+router.get('/name/:name', (req, res, next) => {
+    const name = req.params.name;
+
+    const query = {
+        name: name
+    };
+
+    Function.getAll(query)
+        .then((result) => {
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
+        })
+        .catch((err) => {
+            const htmlError = new error.NotFoundError(err);
+            return res.status(htmlError.status).send(htmlError);
+        });
+});
+
 router.post('/', (req, res, next) => {
     const body = req.body;
 
