@@ -27,6 +27,19 @@ exports.getAll = async function getAll(rqQuery){
     });
 };
 
+exports.createOne = async function createOne(newName){
+    return new Promise((resolve, reject) => {
+        Model.create(newName)
+        .then(result => {
+            return resolve(result.dataValues || {});
+        }).catch(err => {
+            console.log('error', err);
+            return reject(err);
+        });
+    });
+};
+
+/*
 exports.updateOne = async function updateOne(id, newUniverse){
     return new Promise((resolve, reject) => {
         Model.update(
@@ -53,18 +66,6 @@ exports.getOneById = async function getOneById(id){
         })
         .then(result => {
             return resolve(result);
-        }).catch(err => {
-            console.log('error', err);
-            return reject(err);
-        });
-    });
-};
-
-exports.createOne = async function createOne(newUniverse){
-    return new Promise((resolve, reject) => {
-        Model.create(newUniverse)
-        .then(result => {
-            return resolve(result.dataValues || {});
         }).catch(err => {
             console.log('error', err);
             return reject(err);

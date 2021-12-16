@@ -3,6 +3,7 @@ const router = require('express').Router();
 const error = require('../errors/notFound');
 // const uuid = require('uuid/v4');
 const path = require("path");
+const { isSet } = require('util/types');
 
 const nameFile = path.basename(__filename).split('.')[0];
 
@@ -45,26 +46,11 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    // try{
-    //     req.body = JSON.parse(Object.keys(req.body)[0]);
-    // } catch(err) {
-    //     req.body = req.body;
-    // }
+    const body = req.body;
 
-    console.log(req.body)
-    return res.status(200).send({});
-    
-    let id = req.body.id;
-    let date = new Date().toJSON().slice(0, 10);
+    if(!isSet(body) || !isSet(body.name)) return res.status(400).send('Bad body request');
 
-    let universe = {
-        idUniverse: uuid(),
-        name: req.body.name,
-        createdAt: date,
-        deleted: null
-    };
-
-    Function.createOne(universe)
+    Function.createOne(body.name)
         .then((result) => {
             return res.status(200).send(result);
         })
@@ -73,6 +59,7 @@ router.post('/', (req, res, next) => {
             return res.status(htmlError.status).send(htmlError);
         });
 });
+
 /*
 router.put('/:id', async (req, res, next) => {
     let myAuth = new error.KeyAuthentification(req.query.key);
