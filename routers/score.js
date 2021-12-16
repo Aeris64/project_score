@@ -99,6 +99,35 @@ router.get('/level/:id', (req, res, next) => {
         });
 });
 
+router.post('/', (req, res, next) => {
+    const body = req.body;
+
+    if(!(body && body.idLevel && body.idPlayer && body.time)) return res.status(400).send('Bad body request');
+
+    const query = {
+        where: {
+            idPlayer: body.idPlayer,
+            idLevel: body.idLevel
+        }
+    }
+
+    const score = {
+        idPlayer: body.idPlayer,
+        idLevel: body.idLevel,
+        time: body.time
+    }
+
+    Function.upsert(query, score)
+        .then((result) => {
+            console.log('res', result)
+            return res.status(200).send(result);
+        })
+        .catch((err) => {
+            let htmlError = new error.NotFoundError(err);
+            return res.status(htmlError.status).send(htmlError);
+        });
+});
+
 /*
 
 router.post('/', (req, res, next) => {  

@@ -23,6 +23,35 @@ exports.getAll = async function getAll(rqQuery){
     });
 };
 
+exports.upsert = async function upsert(query, values){
+    return new Promise((resolve, reject) => {
+        Model.findOne(query)
+        .then(result => {
+            if(result) {
+                console.log('here', result)
+                return resolve(result);
+            }
+            //  return resolve(await result.update(values).then(finalRes => {return finalRes}));
+
+            return resolve(await Model.create(values).then(finalRes => {return finalRes}));
+        }).catch(err => {
+            console.log('error', err);
+            return reject(err);
+        });
+    });
+
+    
+    return Model
+        .findOne({ where: condition })
+        .then(function(obj) {
+            // update
+            if(obj)
+                return obj.update(values);
+            // insert
+            return Model.create(values);
+        })
+};
+
 /*
 exports.getOneById = async function getOneById(id){
     return new Promise((resolve, reject) => {
