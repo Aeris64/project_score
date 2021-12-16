@@ -28,7 +28,8 @@ exports.upsert = async function upsert(query, values){
         Model.findOne(query)
         .then(async result => {
             if(result) {
-                console.log('here', result)
+                if(result.dataValues.time > values.time) return resolve(await result.update(values).then(finalRes => {return finalRes}));
+                
                 return resolve(result);
             }
             //  return resolve(await result.update(values).then(finalRes => {return finalRes}));

@@ -119,8 +119,10 @@ router.post('/', (req, res, next) => {
 
     Function.upsert(query, score)
         .then((result) => {
-            console.log('res', result)
-            return res.status(200).send(result);
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
         })
         .catch((err) => {
             let htmlError = new error.NotFoundError(err);
