@@ -12,7 +12,11 @@ const Function = require(`../function/${nameFile}`);
 router.get('/', (req, res, next) => {
     Function.getAll()
         .then((result) => {
-            return res.status(200).send(result);
+            console.log(result)
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
         })
         .catch((err) => {
             const htmlError = new error.NotFoundError(err);
@@ -29,7 +33,10 @@ router.get('/:id', (req, res, next) => {
 
     Function.getAll(query)
         .then((result) => {
-            return res.status(200).send(result);
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
         })
         .catch((err) => {
             const htmlError = new error.NotFoundError(err);
@@ -37,17 +44,16 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-/*
+router.post('/', (req, res, next) => {
+    // try{
+    //     req.body = JSON.parse(Object.keys(req.body)[0]);
+    // } catch(err) {
+    //     req.body = req.body;
+    // }
 
-router.post('/', (req, res, next) => {  
-    let myAuth = new error.KeyAuthentification(req.query.key);
-    if(!myAuth.authentification()) return res.status(401).send(new error.BadRequestError('Bad API Key'));
-
-    try{
-        req.body = JSON.parse(Object.keys(req.body)[0]);
-    } catch(err) {
-        req.body = req.body;
-    }
+    console.log(req.body)
+    return res.status(200).send({});
+    
     let id = req.body.id;
     let date = new Date().toJSON().slice(0, 10);
 
@@ -60,27 +66,14 @@ router.post('/', (req, res, next) => {
 
     Function.createOne(universe)
         .then((result) => {
-            let belongs = {
-                idRights : 1,
-                id: id,
-                idUniverse: result.idUniverse
-            };
-        
-            belongsFunction.createOne(belongs)
-                .then((result) => {
-                    return res.status(200).send(result);
-                })
-                .catch((err) => {
-                    let htmlError = new error.NotFoundError(err);
-            return res.status(htmlError.status).send(htmlError);
-                });
+            return res.status(200).send(result);
         })
         .catch((err) => {
             let htmlError = new error.NotFoundError(err);
             return res.status(htmlError.status).send(htmlError);
         });
 });
-
+/*
 router.put('/:id', async (req, res, next) => {
     let myAuth = new error.KeyAuthentification(req.query.key);
     if(!myAuth.authentification()) return res.status(401).send(new error.BadRequestError('Bad API Key'));

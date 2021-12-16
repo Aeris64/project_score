@@ -12,7 +12,10 @@ const Function = require(`../function/${nameFile}`);
 router.get('/', (req, res, next) => {
     Function.getAll()
         .then((result) => {
-            return res.status(200).send(result);
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
         })
         .catch((err) => {
             const htmlError = new error.NotFoundError(err);
@@ -29,7 +32,10 @@ router.get('/:id', (req, res, next) => {
 
     Function.getAll(query)
         .then((result) => {
-            return res.status(200).send(result);
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
         })
         .catch((err) => {
             const htmlError = new error.NotFoundError(err);

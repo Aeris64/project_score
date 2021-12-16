@@ -27,6 +27,21 @@ exports.getAll = async function getAll(rqQuery){
     });
 };
 
+exports.updateOne = async function updateOne(id, newUniverse){
+    return new Promise((resolve, reject) => {
+        Model.update(
+            { name: newUniverse.name,
+              deleted: newUniverse.deleted },
+            { where: {idUniverse:id} })
+        .then(result => {
+            return resolve(result.dataValues || {});
+        }).catch(err => {
+            console.log('error', err);
+            return reject(err);
+        });
+    });
+};
+
 /*
 exports.getOneById = async function getOneById(id){
     return new Promise((resolve, reject) => {
