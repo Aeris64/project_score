@@ -13,7 +13,6 @@ const Function = require(`../function/${nameFile}`);
 router.get('/', (req, res, next) => {
     Function.getAll()
         .then((result) => {
-            console.log(result)
             return res.status(200).send({
                 code: 200,
                 data: result
@@ -72,11 +71,14 @@ router.get('/name/:name', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     const body = req.body;
+    console.log(body)
 
     if(!isSet(body) || !isSet(body.name)) return res.status(400).send('Bad body request');
+    console.log(body)
 
     Function.createOne(body.name)
         .then((result) => {
+            console.log('res', result)
             return res.status(200).send(result);
         })
         .catch((err) => {
