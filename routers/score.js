@@ -83,6 +83,7 @@ router.get('/level/:id', (req, res, next) => {
             let levelName = await FunctionLevel.getAll({id: id});
             levelName = (levelName[0] ? levelName[0].name : '');
 
+            let i = 1;
             for(const row of result) {
                 let playerName = await FunctionPlayer.getAll({where: {id: row.idPlayer}});
                 playerName = (playerName[0] ? playerName[0].name : '');
@@ -96,6 +97,9 @@ router.get('/level/:id', (req, res, next) => {
                 const finalTime = (minutes < 10 ? '0' : '') + minutes + ':' + (secondes < 10 ? '0' : '') + secondes + ':' + (centi < 10 ? '0' : '') + centi;
 
                 row.digitTime = finalTime;
+
+                row.position = i;
+                i++;
             }
 
             return res.status(200).send(result);
