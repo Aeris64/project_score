@@ -49,6 +49,8 @@ router.get('/:id', (req, res, next) => {
 router.get('/name/:name', (req, res, next) => {
     const name = req.params.name;
 
+    if(!(name)) return res.status(400).send('Bad param request');
+
     const query = {
         attributes: ['id'],
         where: {

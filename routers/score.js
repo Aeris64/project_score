@@ -98,7 +98,7 @@ router.get('/level/:id', (req, res, next) => {
 
                 row.digitTime = finalTime;
 
-                row.position = i;
+                row.position = i + '/' + result.length;
                 i++;
             }
 
@@ -113,7 +113,7 @@ router.get('/level/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const body = req.body;
 
-    if(!(body && body.idLevel && body.idPlayer && body.time)) return res.status(400).send('Bad body request');
+    if(!(body && body.idLevel && body.idPlayer && body.time && body.time > 0)) return res.status(400).send('Bad body request');
 
     const query = {
         where: {
