@@ -102,7 +102,10 @@ router.get('/level/:id', (req, res, next) => {
                 i++;
             }
 
-            return res.status(200).send(result);
+            return res.status(200).send({
+                code: 200,
+                data: result
+            });
         })
         .catch((err) => {
             const htmlError = new error.NotFoundError(err);
