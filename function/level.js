@@ -8,7 +8,9 @@ const Model = global.data.allModels.get(nameFile.toLowerCase());
 
 exports.getAll = async function getAll(rqQuery){
     return new Promise((resolve, reject) => {
-        const query = {};
+        const query = {
+            attributes: ['id', 'name']
+        };
 
         if(rqQuery) query.where = rqQuery;
 
