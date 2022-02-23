@@ -10,7 +10,12 @@ const nameFile = path.basename(__filename).split('.')[0];
 const Function = require(`../function/${nameFile}`);
 
 router.get('/', (req, res, next) => {
-    Function.getAll()
+
+    const query = {
+        archived: 0
+    };
+
+    Function.getAll(query)
         .then((result) => {
             return res.status(200).send({
                 code: 200,
@@ -27,6 +32,7 @@ router.get('/:id', (req, res, next) => {
     const id = (isNaN(req.params.id) ? 0 : parseInt(req.params.id));
 
     const query = {
+        archived: 0,
         id: id
     };
 
