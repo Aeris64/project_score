@@ -2,7 +2,7 @@
     "mode": "local",
     "port": 6442,
     "user": "root",
-    "pass": "root",
+    "pass": "",
     "host": "localhost",
     "name": "project_jv",
     "type": "mysql"

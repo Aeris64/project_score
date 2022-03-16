@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonfile": "^6.1.0",
+    "mysql2": "^2.3.3-rc.0",
+    "sequelize": "^6.9.0"
+  }
+}
